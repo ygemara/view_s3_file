@@ -17,9 +17,22 @@ def get_s3_client(access_key, secret_key):
     )
 
 def parse_s3_path(s3_path):
-    parts = s3_path.replace("s3://", "").split("/")
+    # Remove 's3://' prefix if present
+    s3_path = s3_path.replace("s3://", "")
+    
+    # Split the path into parts
+    parts = s3_path.rstrip('/').split("/")
+    
+    # The first part is always the bucket name
     bucket = parts[0]
-    prefix = "/".join(parts[1:])
+    
+    # The rest (if any) is the prefix
+    prefix = '/'.join(parts[1:])
+    
+    # Ensure the prefix ends with a '/' if it's not empty
+    if prefix and not prefix.endswith('/'):
+        prefix += '/'
+    
     return bucket, prefix
 
 @st.cache_data
