@@ -24,7 +24,7 @@ def parse_s3_path(s3_path):
 
 @st.cache_data
 def list_partitions(_s3_client, bucket, prefix):
-    st.write("Listing partitions...")
+    #st.write("Listing partitions...")
     paginator = _s3_client.get_paginator('list_objects_v2')
     day_pattern = re.compile(r'date=(\d{4}-\d{2}-\d{2})')
     month_pattern = re.compile(r'yearmonth=(\d{4}-\d{2})')
@@ -45,7 +45,7 @@ def list_partitions(_s3_client, bucket, prefix):
         st.error(f"Error accessing S3: {str(e)}")
         return None
     
-    st.write(f"Found {len(dates)} unique partitions.")
+    #st.write(f"Found {len(dates)} unique partitions.")
     return sorted(list(dates))
 
 def get_file_extension(file_key):
