@@ -60,7 +60,7 @@ def get_file_extension(file_key):
 
 @st.cache_data
 def get_sample_data(_s3_client, bucket, prefix):
-    st.write("Searching for sample data...")
+    #st.write("Searching for sample data...")
     try:
         response = _s3_client.list_objects_v2(Bucket=bucket, Prefix=prefix, MaxKeys=100)
         
